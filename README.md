@@ -46,10 +46,10 @@ Our code should result in zero PMD issues before commiting the code to master.
 
 To run the SpotBugs tool over the code to find potential issues run the following command:
 ```
-./gradlew findbugsMain findbugsTest
+./gradlew spotbugsMain spotbugsTest
 ```
-and a HTML test report will be written to `./build/reports/findbugs/test.html` for test code and
-to `build/reports/findbugs/main.html` for main code.
+and a HTML test report will be written to `./build/reports/spotbugs/test.html` for test code and
+to `build/reports/spotbugs/main.html` for main code.
 
 Our code should result in zero Findbug issues before commiting the code to master.
 NB. The findbugs configuration is yet to be finalized.
