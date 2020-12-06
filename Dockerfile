@@ -7,4 +7,4 @@ COPY ./build/libs/ /app
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","/app/build/libs/cashman-1.0.0.jar"]
+ENTRYPOINT ["java","-jar","/app/cashman-service-1.0.0.jar"]
