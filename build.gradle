@@ -1,0 +1,115 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.6.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+    id 'pmd'
+    id 'checkstyle'
+    id "com.github.spotbugs" version "4.6.0"
+}
+
+group = 'sc.com.assessment'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+tasks.withType(Checkstyle).each { checkstyleTask ->
+    checkstyleTask.doLast {
+        reports.all { report ->
+            def outputFile = report.destination
+            if (outputFile.exists() && outputFile.text.contains("<error ")) {
+                throw new GradleException("There were checkstyle warnings! For more info check $outputFile")
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.apache.commons:commons-lang3'
+    implementation 'ch.qos.logback:logback-core:1.2.3'
+
+    // Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    // OpenAPI 3.0.x Docs
+    implementation 'org.springdoc:springdoc-openapi-ui:1.4.3'
+
+    // Immutables
+    implementation 'org.immutables:builder:2.8.1'
+    implementation 'org.immutables:value:2.8.1'
+    implementation 'org.immutables:annotate:2.8.1'
+
+    // Mapstruct
+    implementation 'org.mapstruct:mapstruct:1.3.1.Final'
+
+    // DB
+    runtimeOnly 'com.h2database:h2:1.4.200'
+
+    // Immutables Preprocessor for Production Code
+    annotationProcessor 'org.immutables:value:2.8.1'
+    // MapStruct Preprocessor for Production Code
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.3.1.Final'
+
+    // Immutables Preprocessor for Test Code
+    testAnnotationProcessor 'org.immutables:value:2.8.1'
+    // MapStruct Preprocessor for Test Code
+    testAnnotationProcessor 'org.mapstruct:mapstruct-processor:1.3.1.Final'
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude module: "junit-vintage-engine"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+checkstyle {
+    configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+    toolVersion = '6.18'
+    showViolations = true
+    ignoreFailures = false
+    configProperties = ["suppressionFile": project(':').file('config/checkstyle/suppressions.xml')]
+}
+
+pmd {
+    ignoreFailures = false
+    sourceSets = [sourceSets.main, sourceSets.test]
+    ruleSets = []
+    reportsDir = file("$project.buildDir/reports/pmd")
+}
+
+pmdMain {
+    group = 'reporting'
+    ruleSetFiles = files("${project.rootDir}/config/pmd/pmd-default-main-rule-set.xml")
+}
+
+pmdTest {
+    group = 'reporting'
+    ruleSetFiles = files("${project.rootDir}/config/pmd/pmd-default-test-rule-set.xml")
+}
+
+spotbugsMain {
+    reports {
+        html {
+            enabled = true
+            destination = file("$buildDir/reports/spotbugs/main/spotbugs.html")
+            stylesheet = 'fancy-hist.xsl'
+        }
+    }
+}
+
+spotbugsTest {
+    reports {
+        html {
+            enabled = true
+            destination = file("$buildDir/reports/spotbugs/main/spotbugs.html")
+            stylesheet = 'fancy-hist.xsl'
+        }
+    }
+}

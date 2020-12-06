@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "998a5293-8c5d-4ed6-8b59-7bd6afdd6ab1",
+		"name": "CashMan",
+		"description": "A Rest API collection for communicating with CashMan(ATM) to perform the following -\n\n1 - Get Available Cash in CashMan\n\n2 - Withdraw Cash \n\n3 - Add New Denomination\n\n4 - Add notes to existing denominations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Available Cash",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cash-man/available-cash",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cash-man",
+						"available-cash"
+					]
+				},
+				"description": "Retrieve the cash available in cashMan"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Denomination",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"denominationType\":\"Ten\",\n        \"denominationCount\":5,\n        \"denominationValue\":10\n    },\n    {\n        \"denominationType\":\"Twenty\",\n        \"denominationCount\":15,\n        \"denominationValue\":20\n    },\n    {\n        \"denominationType\":\"Fifty\",\n        \"denominationCount\":25,\n        \"denominationValue\":50\n    },\n    {\n        \"denominationType\":\"Hundred\",\n        \"denominationCount\":10,\n        \"denominationValue\":100\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/cash-man/add-denomination",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cash-man",
+						"add-denomination"
+					]
+				},
+				"description": "Post request to add New denomination"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Denomination",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n\n    {\n        \"denominations\":[{\n\t\t\t\"denominationType\": \"Ten\",\n\t\t\t\"denominationCount\": 30,\n\t\t\t\"denominationValue\": 10\n\t\t},\n\t\t{\n\t\t\t\"denominationType\": \"Twenty\",\n\t\t\t\"denominationCount\": 30,\n\t\t\t\"denominationValue\": 20\n\t\t},\n\t\t{\n\t\t\t\"denominationType\": \"Fifty\",\n\t\t\t\"denominationCount\": 15,\n\t\t\t\"denominationValue\": 50\n\t\t}\n\t]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/cash-man/update-denomination",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cash-man",
+						"update-denomination"
+					]
+				},
+				"description": "Add notes to a denomination"
+			},
+			"response": []
+		},
+		{
+			"name": "Withdraw Cash",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cash-man/withdraw/700",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cash-man",
+						"withdraw",
+						"700"
+					]
+				},
+				"description": "Request to withdraw cash from cashman"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Available Denomination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cash-man/available-denominations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cash-man",
+						"available-denominations"
+					]
+				},
+				"description": "Returns the list of all available denominations"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
