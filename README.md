@@ -65,6 +65,8 @@ NB. The findbugs configuration is yet to be finalized.
 - CheckStyle
 - PMD
 - SpotBugs
+- Docker
+- Github Actions
 
 ### Related URLs
 Cashman-service source code is stored in Github [https://github.com/akshayjamwal07/cashman-service](https://github.com/akshayjamwal07/cashman-service)
