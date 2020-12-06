@@ -68,7 +68,7 @@ NB. The findbugs configuration is yet to be finalized.
 - Docker
 - Github Actions
 
-### Related URLs
+### Github Repo
 Cashman-service source code is stored in Github [https://github.com/akshayjamwal07/cashman-service](https://github.com/akshayjamwal07/cashman-service)
 
 # <a href="run-api"></a> Run the API
@@ -79,6 +79,10 @@ An example command line to run the Cashman Service after it has been build would
 ```
 ${JAVA_HOME}/bin/java - jar build/libs/cashman-service-1.0.0.jar
 ```
+
+### PostMan Collection
+
+A postman collection is added to src/test/resources/postman to facilitate the usage of this API
 
 # Documentation
 
